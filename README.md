@@ -4,6 +4,6 @@ The end-of-term project for the Advanced Math Analysis with MATLAB course of CS 
 
 
 
-**Please note that this code is open-sourced under *GPLv3* license, that is to say that if you reuse the code, *all* your codes is supposed to be open-sourced, and that you should *never* remove the copyright notice on the header of every source file, and that you should *never* change the license, and that you are *supposed* to state all your changes on the source codes. **  
+**Please note that this code is open-sourced under *GPLv3* license, that is to say that if you reuse the code, *all* your codes is supposed to be open-sourced, and that you should *never* remove the copyright notice on the header of every source file, and that you should *never* change the license, and that you are *supposed* to state all your changes on the source codes.**  
 
 
