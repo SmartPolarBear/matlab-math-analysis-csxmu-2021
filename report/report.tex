@@ -9,6 +9,10 @@
 \usepackage{multirow}
 \usepackage{listings}
 \usepackage{url}
+
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithmicx,algorithm}
+
 %%uncomment following line if you are going to use ``Chinese''
 %\usepackage{ctex} 
 
@@ -95,6 +99,26 @@ Based on the result, the gradient is
 \subsubsection{Find the extreme values}
 To find the extreme values of $F(x,y)$ with gradient decent method, we walk little steps towards the direction of the gradient. To formalize this idea, the algorithm is shown as follows.
 
+\begin{algorithm}
+	\caption{Gradient Descent}
+	\hspace*{0.02in} {\bf Input:}
+	Initial point $x_0$, a constant $\alpha$, $k=0$
+	\begin{algorithmic}
+	\While{termiation condition does not hold}
+	\State $k=k+1$
+	\State $x_{k+1}=x_k-\alpha \nabla \cdot f(x_k)$
+	
+	\EndWhile
+	\end{algorithmic}
+\end{algorithm}
+
+Various problems occurs if this brute-force algorithm is implemented directly. The speed of convergence is annoyingly slow if parameters are not chosen right. In fact, I never succeeded finding a set of parameters that works. A well-known optimization is called Stochastic gradient descent, or SGD, improve it significantly.
+
+The given parameter $\alpha$ in the brute-force algorithm, which is referred as learning rate, will change each round according to the situation. To be more exact, SGD tries to find a learning rate $m$, so that it minimize the function
+
+\begin{equation}
+	\nabla \cdot f(x,y)=( \frac{2*x}{5} + cos(x + y), \frac{y}{5} + cos(x + y))
+\end{equation}
 
 \subsection{Acknowledgment}
 
