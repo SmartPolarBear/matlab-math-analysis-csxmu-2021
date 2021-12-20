@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{graphics,epsfig}
+\usepackage{xspace}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{subfigure}
+\usepackage{multirow}
+\usepackage{listings}
+%%uncomment following line if you are going to use ``Chinese''
+%\usepackage{ctex} 
+
+\definecolor{ballblue}{rgb}{0.13, 0.67, 0.8}
+\definecolor{cornflowerblue}{rgb}{0.39,0.58,0.93}
+\definecolor{babyblueeyes}{rgb}{0.63, 0.79, 0.95}
+
+% preset-listing options
+\lstset{
+  backgroundcolor=\color{white},   
+  basicstyle=\footnotesize,    
+  language=matlab,
+  breakatwhitespace=false,         
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{ballblue},    % comment style
+  extendedchars=true,              
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 
+  keywordstyle=\color{blue},       % keyword style
+  numbers=left,                    
+  numbersep=5pt,                   
+  numberstyle=\tiny\color{blue}, 
+  rulecolor=\color{babyblueeyes},
+  stepnumber=1,              
+  stringstyle=\color{black},     % string literal style
+  tabsize=4,                       % sets default tabsize to 4 spaces
+  title=\lstname                   
+}
+
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=20mm,
+ right=20mm,
+ top=20mm,
+ bottom=20mm,
+ }
+
+\marginparwidth = 10pt
+
+
+\begin{document}
+\title{Course Project Report: Advanced Math Analysis with Matlab}
+\author{KeZheng Xiong \\ 22920202204622}
+
+\maketitle
+
+\tableofcontents
+
+\pagebreak
+
+\section{Problem 1}
+
+\subsection{Problem Description}
+Given function $F(x, y) = 0.2x^2 + 0.1y^2 + sin(x + y)$, please work out its
+gradient. Based on the gradient, please find out the local extreme of function F(x,y)
+when both x and y are in the range of $[-2*\pi, 2*\pi]$. The 2D and 3D views of the function
+is given in Fig. 1. 
+
+\subsection{Solution}
+
+\subsubsection{The gradient of the function}
+
+I get the gradient of the function using the following code
+
+\begin{lstlisting}
+	syms x y;
+	f=0.2*x^2+0.1*y^2+sin(x+y);
+	diff(f,x)
+	diff(f,y)
+\end{lstlisting}
+
+Based on the result, the gradient is
+
+\begin{equation}
+	\nabla \cdot f(x,y)=( \frac{2*x}{5} + cos(x + y), \frac{y}{5} + cos(x + y))
+\end{equation}
+
+\subsubsection{Find the extreme values}
+To find the extreme values of $F(x,y)$ with gradient decent method, we walk little steps towards the direction of the gradient. To formalize this idea, the algorithm is shown as follows.
+
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{pics/linear_reg_dat.pdf}
+	\caption{Input data.}
+\end{figure}
+
+\section{Framework of the Solution}
+Present your framework overview over here
+
+%
+%if one wants to paste part of the code into the report
+%one can put in following manner
+\begin{lstlisting}[language=c, linewidth=0.8\linewidth, caption={Put your code here if necessary}]
+#include <stdio.h>
+int main()
+{
+    printf("Guten tag!\n");
+    return 0;
+}
+\end{lstlisting}
+
+\section{Experiment Results and Observations}
+Put your results with observations as well as explanations over here
+
+\begin{figure}[b]
+	\centering
+	\subfigure[sub fig1]
+	{\includegraphics[width=0.3\linewidth]{pics/eg4.pdf}}
+	\hspace{0.15in}
+	\subfigure[sub fig2]
+	{\includegraphics[width=0.3\linewidth]{pics/eg5.pdf}}
+	\caption{In the case that you want to put several figures together. You put in this way.}
+\end{figure}
+
+\section{What I learned from the Project}
+\begin{table}
+\caption{If one wants to insert any tables, one can take this as an example}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	Header & Para1 & Para2 & Para3 \\ \hline
+	Result1 & 0.11 & \textbf{0.8} & 0.5 \\ \hline
+	Result2 & 0.14 & \textcolor{red}{0.85} & 0.25 \\ \hline
+	\end{tabular}
+\end{center}
+\end{table}
+
+\end{document}
