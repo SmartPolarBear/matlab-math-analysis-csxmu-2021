@@ -8,6 +8,7 @@
 \usepackage{subfigure}
 \usepackage{multirow}
 \usepackage{listings}
+\usepackage{url}
 %%uncomment following line if you are going to use ``Chinese''
 %\usepackage{ctex} 
 
@@ -51,11 +52,14 @@
 \marginparwidth = 10pt
 
 
+
 \begin{document}
 \title{Course Project Report: Advanced Math Analysis with Matlab}
 \author{KeZheng Xiong \\ 22920202204622}
 
 \maketitle
+
+\abstract{The report for the end-of-term project of Advanced Math Analysis with MATLAB fall 2021 course. All the source code is open-sourced on the Github repository \url{https://github.com/SmartPolarBear/matlab-math-analysis-csxmu-2021} under \textbf{GPLv3} license}
 
 \tableofcontents
 
@@ -92,53 +96,9 @@ Based on the result, the gradient is
 To find the extreme values of $F(x,y)$ with gradient decent method, we walk little steps towards the direction of the gradient. To formalize this idea, the algorithm is shown as follows.
 
 
+\subsection{Acknowledgment}
 
+Thanks to (TODO)
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.3\linewidth]{pics/linear_reg_dat.pdf}
-	\caption{Input data.}
-\end{figure}
-
-\section{Framework of the Solution}
-Present your framework overview over here
-
-%
-%if one wants to paste part of the code into the report
-%one can put in following manner
-\begin{lstlisting}[language=c, linewidth=0.8\linewidth, caption={Put your code here if necessary}]
-#include <stdio.h>
-int main()
-{
-    printf("Guten tag!\n");
-    return 0;
-}
-\end{lstlisting}
-
-\section{Experiment Results and Observations}
-Put your results with observations as well as explanations over here
-
-\begin{figure}[b]
-	\centering
-	\subfigure[sub fig1]
-	{\includegraphics[width=0.3\linewidth]{pics/eg4.pdf}}
-	\hspace{0.15in}
-	\subfigure[sub fig2]
-	{\includegraphics[width=0.3\linewidth]{pics/eg5.pdf}}
-	\caption{In the case that you want to put several figures together. You put in this way.}
-\end{figure}
-
-\section{What I learned from the Project}
-\begin{table}
-\caption{If one wants to insert any tables, one can take this as an example}
-\begin{center}
-	\begin{tabular}{|c|c|c|c|}
-	\hline
-	Header & Para1 & Para2 & Para3 \\ \hline
-	Result1 & 0.11 & \textbf{0.8} & 0.5 \\ \hline
-	Result2 & 0.14 & \textcolor{red}{0.85} & 0.25 \\ \hline
-	\end{tabular}
-\end{center}
-\end{table}
 
 \end{document}
