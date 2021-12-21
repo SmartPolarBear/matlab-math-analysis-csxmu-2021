@@ -3,8 +3,7 @@ syms x y;
 f=0.2*x^2+0.1*y^2+sin(x+y);
 [e,n,h,l]=gradient_descent(f,[-2;-2],0.001);
 
-
-fc = fcontour(f,[-2*pi 2*pi -2*pi 2*pi]);
+fc = fcontour(f,[-2*pi 2*pi -2*pi 2*pi],'LevelStep',0.1);
 
 fc.LineWidth = 1;
 fc.LineStyle = "-";
@@ -15,6 +14,8 @@ colorbar;
 hold on;
 grid off;
 plot(h(:, 1),h(:, 2), '-r.');
+hold on;
+
 xlabel('x');
 ylabel('y');
 
