@@ -1,11 +1,18 @@
+% Copyright © KeZheng Xiong 22920202204622
+% Open-sourced under GPLv3
+
 clear;
 syms x y;
 f=0.2*x^2+0.1*y^2+sin(x+y);
 
-posible=[[-3;-4] [0;-1] [-2;-2]]
+posible=[[-3;-4] [0;-1] [-2;-2]];
 
 for p=posible
     [e,n,h,l]=gradient_descent(f,p,0.001);
+    
+    double(e)
+    double(0.2*e(1)^2+0.1*e(2)^2+sin(e(1)+e(2)))
+    
     
     fc = fcontour(f,[-2*pi 2*pi -2*pi 2*pi],'LevelStep',0.3);
 
@@ -23,6 +30,14 @@ end
 
 xlabel('x');
 ylabel('y');
+
+
+%[x,fmin]=fminsearch(@fun2_3,[-3,-4])
+%[x,fmin]=fminsearch(@fun2_3,[0,-1])
+%[x,fmin]=fminsearch(@fun2_3,[1,2])
+%function f=fun2_3(x)
+%f=0.2*x(1)^2+0.1*x(2)^2+sin(x(1)+x(2));
+%end
 
 
 function [endp,num,hist,list]=gradient_descent(f,x0,eps)

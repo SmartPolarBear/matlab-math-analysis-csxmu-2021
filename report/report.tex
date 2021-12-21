@@ -178,14 +178,7 @@ The implementation is shown in Code \ref{code:sgd}
 	end
 \end{lstlisting}
 
-To test the implementation, Each point of the steps taken in the procedure of gradient descent algorithm is plotted on Figure \ref{fig:p1_visualize_in_contour}, in red scattered lines. The initial point chosen are$(-3,-4)$, $(0,-1)$, $(-2,-2)$. The choice of initial points are significant. It can \textbf{influence the speed of convergence dramatically}. Given a bad initial point, it may not reach the point of convergence at all, or take unbearable long time. Note that the second choice of $(0,-1)$ is especially difficult. It takes may attempts to find this point which has a high speed of convergence.
-
-\subsection{Analysis and Conclusion} 
-
-
-Gradient descent is a widely-used way of finding the extreme values of any function. There are many optimizations for this method, which will improve the speed of convergence. SGD is taken in this project, which yields satisfying results.
-
-SGD gradient descent has a major flaw that it is known for "easy to be trapped in a local minimum", which may account for the difficulties in finding a good initial point for the second extreme value. More sophisticated optimization such as Momentum gradient descent and AdaGrad gradient descent can be applied if the speed of convergence is too slow.
+To test the implementation, Each point of the steps taken in the procedure of gradient descent algorithm is plotted on Figure \ref{fig:p1_visualize_in_contour}, in red scattered lines, and the result is in Table \ref{table:p1result}. In Table \ref{table:p1result}, the 4th column shows the value from the builtin $fminsearch$ function, which reveals that the implementation of SGD gradient descent algorithm gives the right answers.
 
 \begin{figure}[h]
 	\caption{The visualization of the steps of the SGD gradient descent algorithm}
@@ -194,6 +187,31 @@ SGD gradient descent has a major flaw that it is known for "easy to be trapped i
 	
 	\label{fig:p1_visualize_in_contour}
 \end{figure}
+
+The initial points for gradient descent chosen are $(-3,-4)$, $(0,-1)$, and $(-2,-2)$. The choice of initial points are significant. It can \textbf{influence the speed of convergence dramatically}. Given a bad initial point, the algorithm may not reach the point of convergence at all, or take a unbearable long time to reach there. It worth mentioning that the second choice of $(0,-1)$ is especially difficult. It takes a great many attempts to find this point which contributes to a high speed of convergence.
+
+
+\begin{table}[h]
+	\label{table:p1result}
+	\caption{The Extreme Values of $F(x,y)$}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			No. & X-Y Coordinates & $F(x,y)$ & Result of $fminsearch()$ \\ \hline
+			0 & $(-2.2469,-4.4902)$ & 2.5874 &  2.5874 \\ \hline
+			1 & $(-0.4611,-0.9241)$ & -0.8549 & -0.8549 \\ \hline
+			2 & $(1.3768,2.7529)$ & 0.3020 & 0.3020 \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\subsection{Analysis and Conclusion}   
+  
+
+Gradient descent is a widely-used way of finding the extreme values of any function. There are many optimizations for this method, which will improve the speed of convergence. SGD is taken in this project, which yields satisfying results.
+
+SGD gradient descent has a major flaw that it is known for "easy to be trapped in a local minimum", which may account for the difficulties in finding a good initial point for the second extreme value. More sophisticated optimization such as Momentum gradient descent and AdaGrad gradient descent can be applied if the speed of convergence is too slow.
+
 
 
 \section{Acknowledgment}
