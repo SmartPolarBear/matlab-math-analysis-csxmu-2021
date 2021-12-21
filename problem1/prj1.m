@@ -1,18 +1,33 @@
 clear;
 syms x y;
 f=0.2*x^2+0.1*y^2+sin(x+y);
-[e,n,h]=gradient_descent(f,[-2;-6],0.001);
-e
-n
-h
+[e,n,h,l]=gradient_descent(f,[-2;-2],0.001);
 
-function [endp,num,history]=gradient_descent(f,x0,eps)
+
+fc = fcontour(f,[-2*pi 2*pi -2*pi 2*pi]);
+
+fc.LineWidth = 1;
+fc.LineStyle = "-";
+fc.Fill='off';
+fc.LevelList = [fc.LevelList l];
+
+colorbar;
+hold on;
+grid off;
+plot(h(:, 1),h(:, 2), '-r.');
+xlabel('x');
+ylabel('y');
+
+
+function [endp,num,hist,list]=gradient_descent(f,x0,eps)
     syms x y m;
     d=-[diff(f,x);diff(f,y)];
     
     nd=subs(d,x,x0(1));
     nd=subs(nd,y,x0(2));
     nrm=double(norm(nd));
+    
+    list=[];
     
     k=0;
     while(nrm>=eps)
@@ -24,7 +39,11 @@ function [endp,num,history]=gradient_descent(f,x0,eps)
         
         x0=x0+nm*nd;
         k=k+1;
-        history(k,:)=x0;
+        
+        hist(k,:)=[double(x0(1));double(x0(2))];
+        vf=subs(f,x,x0(1));
+        vf=subs(vf,y,x0(2));
+        list = [list double(eval(vf))];
         
         nd=subs(d,x,x0(1));
         nd=subs(nd,y,x0(2)); 

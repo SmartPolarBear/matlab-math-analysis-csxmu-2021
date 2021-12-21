@@ -14,7 +14,7 @@
 \usepackage{algorithmicx,algorithm}
 
 %%uncomment following line if you are going to use ``Chinese''
-%\usepackage{ctex} 
+\usepackage{ctex} 
 
 \definecolor{ballblue}{rgb}{0.13, 0.67, 0.8}
 \definecolor{cornflowerblue}{rgb}{0.39,0.58,0.93}
@@ -22,26 +22,32 @@
 
 % preset-listing options
 \lstset{
-  backgroundcolor=\color{white},   
-  basicstyle=\footnotesize,    
-  language=matlab,
-  breakatwhitespace=false,         
-  breaklines=true,                 % sets automatic line breaking
-  captionpos=b,                    % sets the caption-position to bottom
-  commentstyle=\color{ballblue},    % comment style
-  extendedchars=true,              
-  frame=single,                    % adds a frame around the code
-  keepspaces=true,                 
-  keywordstyle=\color{blue},       % keyword style
-  numbers=left,                    
-  numbersep=5pt,                   
-  numberstyle=\tiny\color{blue}, 
-  rulecolor=\color{babyblueeyes},
-  stepnumber=1,              
-  stringstyle=\color{black},     % string literal style
-  tabsize=4,                       % sets default tabsize to 4 spaces
-  title=\lstname                   
+	basicstyle          =   \sffamily,          
+	keywordstyle        =   \bfseries,         
+	commentstyle        =   \rmfamily\itshape,  
+	stringstyle         =   \ttfamily,  
+	flexiblecolumns,               
+	numbers             =   left, 
+	showspaces          =   false, 
+	numberstyle         =   \zihao{-5}\ttfamily,  
+	showstringspaces    =   false,
+	captionpos          =   t,    
+	frame               =   lrtb,   
 }
+
+\lstdefinestyle{MatlabStyle}{
+	language        =   Matlab, 
+	basicstyle      =   \zihao{-5}\ttfamily,
+	numberstyle     =   \zihao{-5}\ttfamily,
+	keywordstyle    =   \color{blue},
+	keywordstyle    =   [2] \color{teal},
+	stringstyle     =   \color{magenta},
+	commentstyle    =   \color{red}\ttfamily,
+	breaklines      =   true, 
+	columns         =   fixed,
+	basewidth       =   0.5em,
+}
+
 
 \usepackage{geometry}
 \geometry{
@@ -83,7 +89,7 @@ is given in Fig. 1.
 
 I get the gradient of the function using the following code
 
-\begin{lstlisting}
+\begin{lstlisting}[style=MatlabStyle,caption=Gradient Calculation]
 	syms x y;
 	f=0.2*x^2+0.1*y^2+sin(x+y);
 	diff(f,x)
@@ -117,8 +123,24 @@ Various problems occurs if this brute-force algorithm is implemented directly. T
 The given parameter $\alpha$ in the brute-force algorithm, which is referred as learning rate, will change each round according to the situation. To be more exact, SGD tries to find a learning rate $m$, so that it minimize the function
 
 \begin{equation}
-	\nabla \cdot f(x,y)=( \frac{2*x}{5} + cos(x + y), \frac{y}{5} + cos(x + y))
+	h(x,y,m) = \mathbf{x_0} + \nabla \cdot f(x,y)
 \end{equation}
+
+so the following equation is solved each round in the while-loop
+
+\begin{equation}
+	\frac{\partial h}{\partial m} = 0
+\end{equation}
+
+The implementation is shown in Code \ref{code:sgd}
+
+\begin{lstlisting}[style=MatlabStyle,caption=SGD Gradient Descent,label=code:sgd]
+	syms x y;
+	f=0.2*x^2+0.1*y^2+sin(x+y);
+	diff(f,x)
+	diff(f,y)
+\end{lstlisting}
+
 
 \subsection{Acknowledgment}
 
