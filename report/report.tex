@@ -14,36 +14,42 @@
 \usepackage{algorithmicx,algorithm}
 
 %%uncomment following line if you are going to use ``Chinese''
-\usepackage{ctex} 
+% \usepackage{ctex} 
 
 \definecolor{ballblue}{rgb}{0.13, 0.67, 0.8}
 \definecolor{cornflowerblue}{rgb}{0.39,0.58,0.93}
 \definecolor{babyblueeyes}{rgb}{0.63, 0.79, 0.95}
 
 % preset-listing options
+% preset-listing options
 \lstset{
-	basicstyle          =   \sffamily,          
-	keywordstyle        =   \bfseries,         
-	commentstyle        =   \rmfamily\itshape,  
-	stringstyle         =   \ttfamily,  
-	flexiblecolumns,               
-	numbers             =   left, 
-	showspaces          =   false, 
-	numberstyle         =   \zihao{-5}\ttfamily,  
-	showstringspaces    =   false,
-	captionpos          =   t,    
-	frame               =   lrtb,   
+	backgroundcolor=\color{white},   
+	basicstyle=\footnotesize,    
+	language=matlab,
+	breakatwhitespace=false,         
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{ballblue},    % comment style
+	extendedchars=true,              
+	frame=single,                    % adds a frame around the code
+	keepspaces=true,                 
+	keywordstyle=\color{blue},       % keyword style
+	numbers=left,                    
+	numbersep=5pt,                   
+	rulecolor=\color{babyblueeyes},
+	stepnumber=1,              
+	stringstyle=\color{black},     % string literal style
+	tabsize=4,                       % sets default tabsize to 4 spaces
+	title=\lstname                   
 }
 
 \lstdefinestyle{MatlabStyle}{
 	language        =   Matlab, 
-	basicstyle      =   \zihao{-5}\ttfamily,
-	numberstyle     =   \zihao{-5}\ttfamily,
 	keywordstyle    =   \color{blue},
 	keywordstyle    =   [2] \color{teal},
 	stringstyle     =   \color{magenta},
 	commentstyle    =   \color{red}\ttfamily,
-	breaklines      =   true, 
+	breaklines      =   true,
 	columns         =   fixed,
 	basewidth       =   0.5em,
 }
@@ -61,7 +67,7 @@
 
 \marginparwidth = 10pt
 
-
+\graphicspath{ {images/} }
 
 \begin{document}
 \title{Course Project Report: Advanced Math Analysis with Matlab}
@@ -135,14 +141,62 @@ so the following equation is solved each round in the while-loop
 The implementation is shown in Code \ref{code:sgd}
 
 \begin{lstlisting}[style=MatlabStyle,caption=SGD Gradient Descent,label=code:sgd]
-	syms x y;
-	f=0.2*x^2+0.1*y^2+sin(x+y);
-	diff(f,x)
-	diff(f,y)
+
+	function [endp,num,hist,list]=gradient_descent(f,x0,eps)
+		syms x y m;
+		d=-[diff(f,x);diff(f,y)];
+		
+		nd=subs(d,x,x0(1));
+		nd=subs(nd,y,x0(2));
+		nrm=double(norm(nd));
+		
+		list=[];
+		
+		k=0;
+		while(nrm>=eps)
+		nx0=x0+m*nd;
+		nf=subs(f,x,nx0(1));
+		nf=subs(nf,y,nx0(2));
+		h=diff(nf,m);
+		nm=solve(h);
+		
+		x0=x0+nm*nd;
+		k=k+1;
+		
+		hist(k,:)=[double(x0(1));double(x0(2))];
+		vf=subs(f,x,x0(1));
+		vf=subs(vf,y,x0(2));
+		list = [list double(eval(vf))];
+		
+		nd=subs(d,x,x0(1));
+		nd=subs(nd,y,x0(2)); 
+		nrm=double(norm(nd));
+		end
+		
+		num=k;
+		endp=x0;
+	end
 \end{lstlisting}
 
+To test the implementation, Each point of the steps taken in the procedure of gradient descent algorithm is plotted on Figure \ref{fig:p1_visualize_in_contour}, in red scattered lines. The initial point chosen are$(-3,-4)$, $(0,-1)$, $(-2,-2)$. The choice of initial points are significant. It can \textbf{influence the speed of convergence dramatically}. Given a bad initial point, it may not reach the point of convergence at all, or take unbearable long time. Note that the second choice of $(0,-1)$ is especially difficult. It takes may attempts to find this point which has a high speed of convergence.
 
-\subsection{Acknowledgment}
+\subsection{Analysis and Conclusion} 
+
+
+Gradient descent is a widely-used way of finding the extreme values of any function. There are many optimizations for this method, which will improve the speed of convergence. SGD is taken in this project, which yields satisfying results.
+
+SGD gradient descent has a major flaw that it is known for "easy to be trapped in a local minimum", which may account for the difficulties in finding a good initial point for the second extreme value. More sophisticated optimization such as Momentum gradient descent and AdaGrad gradient descent can be applied if the speed of convergence is too slow.
+
+\begin{figure}[h]
+	\caption{The visualization of the steps of the SGD gradient descent algorithm}
+	\centering
+	\includegraphics{p1_visualize_in_contour.png}
+	
+	\label{fig:p1_visualize_in_contour}
+\end{figure}
+
+
+\section{Acknowledgment}
 
 Thanks to (TODO)
 
