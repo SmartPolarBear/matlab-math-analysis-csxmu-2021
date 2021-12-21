@@ -124,21 +124,21 @@ To find the extreme values of $F(x,y)$ with gradient decent method, we walk litt
 	\end{algorithmic}
 \end{algorithm}
 
-Various problems occurs if this brute-force algorithm is implemented directly. The speed of convergence is annoyingly slow if parameters are not chosen right. In fact, I never succeeded finding a set of parameters that works. A well-known optimization is called Stochastic gradient descent, or SGD, improve it significantly.
+Various problems occurs if this brute-force algorithm is implemented directly. The speed of convergence is annoyingly slow if parameters are not chosen right. In fact, I never succeeded finding a set of parameters that works. A well-known optimization  called Stochastic gradient descent, or SGD, improves the performance significantly.
 
-The given parameter $\alpha$ in the brute-force algorithm, which is referred as learning rate, will change each round according to the situation. To be more exact, SGD tries to find a learning rate $m$, so that it minimize the function
+In the brute-force algorithm, The given parameter $\alpha$ controls how long a step is from the point $\mathbf{x_0}$ towards the direction of the gradient. It is a fixed value. On the contrary, in SGD gradient descent algorithm, the length of a step , $m$ , which is also referred to as "learning rate", will be changed each round according to the current position. To be more exact, SGD algorithm tries to find a learning rate $m$, so that it can minimize the function
 
 \begin{equation}
 	h(x,y,m) = \mathbf{x_0} + \nabla \cdot f(x,y)
 \end{equation}
 
-so the following equation is solved each round in the while-loop
+So, in the implementation of the algorithm, the following equation is solved each round in the while-loop to get the expected $m$ value
 
 \begin{equation}
 	\frac{\partial h}{\partial m} = 0
 \end{equation}
 
-The implementation is shown in Code \ref{code:sgd}
+The implementation is shown in Code \ref{code:sgd}. There are four results of the function. $endp$ is the final point, or the result of gradient descent algorithm. $num$ is the number of steps taken. $hist$ is a vector which records all the coordinates of each step, and $list$ contains the corresponding function values. The three parameters are the function, the initial point and the precision, respectively.
 
 \begin{lstlisting}[style=MatlabStyle,caption=SGD Gradient Descent,label=code:sgd]
 
@@ -192,7 +192,6 @@ The initial points for gradient descent chosen are $(-3,-4)$, $(0,-1)$, and $(-2
 
 
 \begin{table}[h]
-	\label{table:p1result}
 	\caption{The Extreme Values of $F(x,y)$}
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|}
@@ -203,6 +202,7 @@ The initial points for gradient descent chosen are $(-3,-4)$, $(0,-1)$, and $(-2
 			2 & $(1.3768,2.7529)$ & 0.3020 & 0.3020 \\ \hline
 		\end{tabular}
 	\end{center}
+	\label{table:p1result}
 \end{table}
 
 \subsection{Analysis and Conclusion}   
@@ -213,6 +213,25 @@ Gradient descent is a widely-used way of finding the extreme values of any funct
 SGD gradient descent has a major flaw that it is known for "easy to be trapped in a local minimum", which may account for the difficulties in finding a good initial point for the second extreme value. More sophisticated optimization such as Momentum gradient descent and AdaGrad gradient descent can be applied if the speed of convergence is too slow.
 
 
+\section{Problem 2}
+
+\subsection{Problem Description}
+
+A factory supplies engine for its customer. According to the contract, the
+factory should deliver its product to the customer in the end of the 1st season: 40 engines;
+in the end of the 2nd season: 60 engines; in the end of the 3rd season: 80 engines. Due
+to limited productivity, to its most, the factory is only able to produce 100 machines
+in a single season. The production cost is given as $f(x) = 50x + 0.2x^2$
+, where $x$ is the
+number of machines produced in one season. It is possible to produce machines more
+than the required quota in each season. In this case, the storage cost is 4 dollars for one
+machine/season. Assuming there is no reservations at the beginning for the first season,
+please work out a production plan that minimizes the production cost
+
+\section{Problem 3}
+
+\subsection{Problem Description}
+\textbf{Prove:} Among the top 32 World Cup finals, the information entropy of the event that a team winning is 5.
 
 \section{Acknowledgment}
 
