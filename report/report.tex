@@ -228,6 +228,55 @@ than the required quota in each season. In this case, the storage cost is 4 doll
 machine/season. Assuming there is no reservations at the beginning for the first season,
 please work out a production plan that minimizes the production cost
 
+\subsection{Solution}
+
+\subsubsection{The Costs}
+
+Let $x_1$, $x_2$ and $x_3$ be the number of machines produced in season 1, 2 and 3, respectively.
+
+Firstly, the production cost $P(\mathbf{x})$ is the sum of each season's production cost.
+
+\begin{equation}
+	P(\mathbf{x})=0.2(x_1^2+x_2^2+x_3^2)+50(x_1+x_2+x_3)
+\end{equation}
+
+Secondly, there are costs for storage if more machines than the need is produced each season, so the storage cost  $S(\mathbf{x})$ is the sum of each season's storage cost.
+
+\begin{equation}
+	S(\mathbf{x})=4(x_1+x_2+x_3)-720
+\end{equation}
+
+The total cost, say $F(\mathbf{x})$ is the sum of $P(\mathbf{x})$ and $S(\mathbf{x})$ 
+
+\begin{equation}
+	F(\mathbf{x})=0.2(x_1^2+x_2^2+x_3^2)+54(x_1+x_2+x_3)-720
+\end{equation}
+
+Its standard form for MATLAB to solve is
+
+\begin{equation}
+\begin{aligned}
+	F(\mathbf{x})=G(\mathbf{x})-720  \\
+	G(\mathbf{x})=\frac{1}{2}\mathbf{x}\mathbf{H}\mathbf{x^T}+ \mathbf{f^T}\mathbf{x} \\
+	H=\left(   
+	\begin{array}{ccc} 
+		0.4 & 0 & 0\\
+		0 & 0.4 & 0\\ 
+		0 & 0 & 0.4\\ 
+	\end{array}
+	\right) \\
+	f^T=\left(   
+	\begin{array}{ccc} 
+		54 & 54 & 54\\
+	\end{array}
+	\right) \\
+\end{aligned}
+\end{equation}
+
+\subsubsection{The Constraints}
+
+
+
 \section{Problem 3}
 
 \subsection{Problem Description}
@@ -235,8 +284,79 @@ please work out a production plan that minimizes the production cost
 
 \subsection{Proof}
 
-The definition of information entropy by
+The definition of information entropy by Shannon is
 
+\begin{equation}
+	H(X)=-\sum_{i}P(x_i)log_2(P(x_i))
+\end{equation}
+
+Let $p_i$ be the possibility for team $i$ to win, the Shannon entropy $H$ is
+
+\begin{equation}
+	H(X)=-\sum_{i=1}^{32}P(x_i)log_2(P(x_i))
+\end{equation}
+
+Subject to the nature of possibility, the following constraints should be satisfied.
+
+\begin{equation}
+	P(x_i) \ge 0
+\end{equation}
+
+And
+
+\begin{equation}
+	\sum_{i=0}^{32}P(x_i) = 1
+\end{equation}
+
+$H(X)$ is a multivariate function. Though it has too many variables to be plotted, it is possible to see how it scales by acquiring its maximums and minimums. To achieve this, Lagrangian multiplier method is used to implement Code \ref{code:p3}.
+
+\begin{lstlisting}[style=MatlabStyle,caption=SGD Gradient Descent,label=code:p3]
+clear;
+% define 32 symbols
+p=sym('p',[1,32]);
+
+% construct f, the Shannon entropy. and sum, the sum of all posibilities, which should be 1, as a constraint
+f=p(1)*log2(p(1));
+sum=p(1);
+
+for i=p(2:32)
+f=f+i*log2(i);
+sum=sum+i;
+end
+
+f=-f;
+
+syms r
+
+l=f+r*(sum-1);
+
+% get the partial derivative for each symbol
+eqns=[];
+for i=p
+eqns=[eqns diff(l,i)];
+end
+
+eqns=[eqns diff(l,r)];
+vars=[p r];
+
+solution=solve(eqns,vars);
+
+ps=subs(p,solution);
+fs=subs(f,solution);
+
+% output the result
+format rat;
+ps
+eval(fs)
+\end{lstlisting}
+
+The result of Code \ref{code:p3} is that
+
+\begin{equation}
+	H(x)=5  \iff  p_i=0.03125, i=1,2,3,...,32
+\end{equation}
+
+Therefore, the proposition is proved. Among the top 32 World Cup finals, the information entropy of the event that a team winning is 5 when the possibility for each team to win is equal. The entropy will be less than 5 otherwise.
 \section{Acknowledgment}
 
 Thanks to (TODO)
