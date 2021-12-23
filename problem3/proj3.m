@@ -1,4 +1,8 @@
+% Copyright © KeZheng Xiong 22920202204622
+% Open-sourced under GPLv3
+
 clear;
+
 p=sym('p',[1,32]);
 
 f=p(1)*log2(p(1));

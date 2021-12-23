@@ -365,7 +365,49 @@ And
 Now that we have translated the problem into equations and inequalities and have written them in the standard form for $quadprog()$ in MATLAB to solve, the solution can be easily implemented in Code \ref{code:p2}.
 
 \begin{lstlisting}[style=MatlabStyle,caption=SGD Gradient Descent,label=code:p2]
+	clear;
+	
+	H=[0.4 0 0;0 0.4 0;0 0 0.4];
+	f=[62;58;54];
+	
+	A=[-1 0 0;-1 -1 0];
+	b=[-60;-100];
+	
+	Aeg=[1 1 1];
+	beg=[180];
+	
+	ub=[100;100;100];
+	lb=[0;0;0];
+	
+	[res,fval,exitflag,output,lambda] = quadprog(H,f,A,b,Aeg,beg,lb,ub);
+	
+	
+	x=sym('x',[1,3]);
+	f=0.2*(x(1)^2+x(2)^2+x(3)^2)+62*x(1)+58*x(2)+54*x(3)-560;
+	fv=subs(f,x,res');
+	
+	res
+	double(fv)
+	
 \end{lstlisting}
+
+Which give the result that
+
+\begin{equation}
+	\begin{aligned}
+		F_{min}(\mathbf{x})=1.2030e+04=12030
+	\end{aligned}
+\end{equation}
+
+When
+
+\begin{equation}
+	\begin{aligned}
+		x_1 = 60 \\
+		x_2 = 55 \\
+		x_3 = 65 \\
+	\end{aligned}
+\end{equation}
 
 \section{Problem 3}
 
