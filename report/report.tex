@@ -75,7 +75,7 @@
 
 \maketitle
 
-\abstract{The report for the end-of-term project of Advanced Math Analysis with MATLAB fall 2021 course. All the source code is open-sourced on the Github repository \url{https://github.com/SmartPolarBear/matlab-math-analysis-csxmu-2021} under \textbf{GPLv3} license}
+\abstract{The report is for the end-of-term project of Advanced Math Analysis with MATLAB fall 2021 course. All the source code is open-sourced on the Github repository \url{https://github.com/SmartPolarBear/matlab-math-analysis-csxmu-2021} under \textbf{GPLv3} license}.
 
 \tableofcontents
 
@@ -126,7 +126,7 @@ To find the extreme values of $F(x,y)$ with gradient decent method, we walk litt
 
 Various problems occurs if this brute-force algorithm is implemented directly. The speed of convergence is annoyingly slow if parameters are not chosen right. In fact, I never succeeded finding a set of parameters that works. A well-known optimization  called Stochastic gradient descent, or SGD, improves the performance significantly.
 
-In the brute-force algorithm, The given parameter $\alpha$ controls how long a step is from the point $\mathbf{x_0}$ towards the direction of the gradient. It is a fixed value. On the contrary, in SGD gradient descent algorithm, the length of a step , $m$ , which is also referred to as "learning rate", will be changed each round according to the current position. To be more exact, SGD algorithm tries to find a learning rate $m$, so that it can minimize the function
+In the brute-force algorithm, The given parameter $\alpha$ controls how long a step is from the point $\mathbf{x_0}$ towards the direction of the gradient. It is a fixed value. On the contrary, in SGD gradient descent algorithm, the length of a step , $m$ , which is also referred to as "learning rate", will be changed each round according to the current position. To be more exact, SGD algorithm tries to find a learning rate $m$, so that it can minimize the function.
 
 \begin{equation}
 	h(x,y,m) = \mathbf{x_0} + \nabla \cdot f(x,y)
@@ -178,14 +178,14 @@ The implementation is shown in Code \ref{code:sgd}. There are four results of th
 	end
 \end{lstlisting}
 
-To test the implementation, Each point of the steps taken in the procedure of gradient descent algorithm is plotted on Figure \ref{fig:p1_visualize_in_contour}, in red scattered lines, and the result is in Table \ref{table:p1result}. In Table \ref{table:p1result}, the 4th column shows the value from the builtin $fminsearch$ function, which reveals that the implementation of SGD gradient descent algorithm gives the right answers.
+To test the implementation, Each point of the steps taken in the procedure of gradient descent algorithm is plotted on Figure \ref{fig:p1_visualize}, in red scattered lines, and the results are in Table \ref{table:p1result}. In Table \ref{table:p1result}, the 4th column shows the value from the built-in $fminsearch$ function, which stresses that this implementation of SGD gradient descent algorithm gives the right results.
 
 \begin{figure}[h]
 	\caption{The visualization of the steps of the SGD gradient descent algorithm}
 	\centering
 	\includegraphics{p1_visualize_in_contour.png}
 	
-	\label{fig:p1_visualize_in_contour}
+	\label{fig:p1_visualize}
 \end{figure}
 
 The initial points for gradient descent chosen are $(-3,-4)$, $(0,-1)$, and $(-2,-2)$. The choice of initial points are significant. It can \textbf{influence the speed of convergence dramatically}. Given a bad initial point, the algorithm may not reach the point of convergence at all, or take a unbearable long time to reach there. It worth mentioning that the second choice of $(0,-1)$ is especially difficult. It takes a great many attempts to find this point which contributes to a high speed of convergence.
@@ -208,9 +208,9 @@ The initial points for gradient descent chosen are $(-3,-4)$, $(0,-1)$, and $(-2
 \subsection{Analysis and Conclusion}   
   
 
-Gradient descent is a widely-used way of finding the extreme values of any function. There are many optimizations for this method, which will improve the speed of convergence. SGD is taken in this project, which yields satisfying results.
+Gradient descent is a widely-used approach to finding the extreme values of any given function. There are many optimizations for this method, which will improve the speed of convergence. SGD is adopted in this project, which yields both right results and satisfying speed.
 
-SGD gradient descent has a major flaw that it is known for "easy to be trapped in a local minimum", which may account for the difficulties in finding a good initial point for the second extreme value. More sophisticated optimization such as Momentum gradient descent and AdaGrad gradient descent can be applied if the speed of convergence is too slow.
+SGD gradient descent has a major flaw that it is known for "easy to be trapped in a local minimum", which may account for the difficulties in finding a good initial point for the second extreme value. More sophisticated optimization such as Momentum gradient descent and Ada-grad gradient descent can be applied if the speed of convergence is too slow for some more complex functions.
 
 
 \section{Problem 2}
@@ -244,15 +244,18 @@ Secondly, there are costs for storage if more machines than the need is produced
 
 \begin{equation}
 	\begin{aligned}
-		S(\mathbf{x})=4*(x_1+(x_1+x_2-40)+(x_1+x_2+x_3-(40+60))) \\
-		=12x_1+8x_2+4x_3-560
+		S(\mathbf{x}) &=& 4*(x_1+(x_1+x_2-40)+(x_1+x_2+x_3-(40+60))) \\
+		&=& 12x_1+8x_2+4x_3-560
 	\end{aligned}
 \end{equation}
 
-The total cost, say $F(\mathbf{x})$ is the sum of $P(\mathbf{x})$ and $S(\mathbf{x})$ 
+The total cost, says $F(\mathbf{x})$, is the sum of $P(\mathbf{x})$ and $S(\mathbf{x})$ 
 
 \begin{equation}
-	F(\mathbf{x})=0.2(x_1^2+x_2^2+x_3^2)+62x_1+58x_2+54x_3-560
+\begin{aligned}
+	F(\mathbf{x}) &=& P(\mathbf{x})+S(\mathbf{x}) \\ 
+	&=& 0.2(x_1^2+x_2^2+x_3^2)+62x_1+58x_2+54x_3-560
+\end{aligned}
 \end{equation}
 
 According to the requirements for MATLAB to solve a quadratic programming problem, function $G(x)$ is defined as follows:
@@ -313,7 +316,7 @@ Write it in the form for MATLAB to solve
 \end{aligned}
 \end{equation}
 
-To meet the requirements of the contract, $x_1$ and $x_2$ should be enough to be delivered, and the total production $x_1+x_2+x_3$ should be just right for the total demand $40+80+100$
+To meet the requirements of the contract, $x_1$ and $x_2$ should be enough to be delivered, and the total production $x_1+x_2+x_3$ should be just enough for the total demand $40+80+100$. 
 
 So we have
 
@@ -491,7 +494,7 @@ The result of Code \ref{code:p3} is that
 Therefore, the proposition is proved. Among the top 32 World Cup finals, the information entropy of the event that a team winning is 5 when the possibility for each team to win is equal. The entropy will be less than 5 otherwise.
 \section{Acknowledgment}
 
-Thanks to the open-source project \textbf{gitignore} (\url{https://github.com/github/gitignore}) to provide me enough information to apply source code version control tools to a MATLAB and \LaTeX project, which I never did before.
+Thanks to the open-source project \textbf{gitignore} (\url{https://github.com/github/gitignore}) to provide me with enough information to apply source code version control tools efficiently, especially \textit{git}, to a project in MATLAB and \LaTeX, which I never did before.
 
 
 \end{document}
