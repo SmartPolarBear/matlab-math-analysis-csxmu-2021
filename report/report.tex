@@ -129,7 +129,7 @@ Various problems occurs if this brute-force algorithm is implemented directly. T
 In the brute-force algorithm, The given parameter $\alpha$ controls how long a step is from the point $\mathbf{x_0}$ towards the direction of the gradient. It is a fixed value. On the contrary, in SGD gradient descent algorithm, the length of a step , $m$ , which is also referred to as "learning rate", will be changed each round according to the current position. To be more exact, SGD algorithm tries to find a learning rate $m$, so that it can minimize the function.
 
 \begin{equation}
-	h(x,y,m) = \mathbf{x_0} + \nabla \cdot f(x,y)
+	h(x,y,m) = \mathbf{x_0} + m \cdot \nabla \cdot f(x,y)
 \end{equation}
 
 So, in the implementation of the algorithm, the following equation is solved each round in the while-loop to get the expected $m$ value
